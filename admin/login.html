@@ -61,12 +61,14 @@
             password:password
           },
           success:function(backData){
-            // console.log(backData);
+            console.log(backData);
             if(backData.code===400){
               // 错误
               alert(backData.msg);
             }else if(backData.code===200){
-              alert(backData.msg);
+              // alert(backData.msg);
+              // 保存token 方便后续的使用
+              window.localStorage.setItem('token',backData.token);
               // 去index
               window.location.href='./index.html';
             }
