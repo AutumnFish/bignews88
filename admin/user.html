@@ -68,6 +68,36 @@
             </form>
         </div>
     </div>
+    <script>
+        $(function () {
+            // 用户详情获取
+            $.ajax({
+                url:BigNew.user_detail,
+                // backData
+                success:function(backData){
+                    console.log(backData);
+                    // 挨个设置
+                    // $(".username").val(backData.data.username);
+                    // $(".nickname").val(backData.data.nickname);
+                    // $(".email").val(backData.data.email);
+                    // $(".password").val(backData.data.password);
+
+                    // 标签元素的 标记和 数据有相同部分
+                    // key 对象的键
+                    for (const key in backData.data) {
+                        // 对象可以 点语法  也可以 中括号
+                        $("."+key).val(backData.data[key]);
+                    }
+
+                    // 单独设置图片
+                    $(".user_pic").attr("src",backData.data.userPic);
+                }
+            })
+       
+  
+        })
+
+    </script>
 </body>
 
 </html>
