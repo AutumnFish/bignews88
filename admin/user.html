@@ -94,7 +94,32 @@
                 }
             })
        
-  
+       
+            // 个人数据修改
+            $(".btn-edit").click(function (e) { 
+                // 阻止默认行为
+                e.preventDefault();
+                // 创建formData
+                // formData需要传入dom对象
+                // $('form') jQ对象
+                // $('form')[0]获取dom元素
+                // var data = new FormData($('form')[0]);
+                var data = new FormData(document.querySelector('form'));
+                // ajax
+                $.ajax({
+                    url:BigNew.user_edit,
+                    type:"post",
+                    data:data,
+                    // 不设置类型
+                    contentType:false,
+                    // 不处理数据
+                    processData:false,
+                    success:function(backData){
+                        console.log(backData);
+                    }
+                })
+             })
+
         })
 
     </script>
