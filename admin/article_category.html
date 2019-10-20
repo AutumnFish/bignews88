@@ -91,7 +91,7 @@
             <td>{{ $value.slug }}</td>
             <td class="text-center">
                 <a href="javascript:void(0)" data-toggle="modal" class=" btn btn-info btn-xs">编辑</a>
-                <a href="javascript:void(0)" class="btn btn-danger btn-xs">删除</a>
+                <a href="javascript:void(0)" data-id="{{$value.id}}" class="btn btn-danger btn-xs btn-delete">删除</a>
             </td>
         </tr>
         {{/each}}
@@ -107,7 +107,7 @@
                         // 调用模板引擎的方法
                         // 传入数据 
                         var html = template("cateTem", backData);
-                        console.log(html);
+                        // console.log(html);
                         // 渲染页面 tr放在tbody中
                         $('tbody').html(html);
                     }
@@ -142,6 +142,29 @@
 
             })
 
+            // 点击删除
+            // tr是动态创建的 需要用到事件委托
+            // $(".btn-delete").click(function () {
+            $("tbody").on("click", ".btn-delete", function () {
+                // 获取id
+                var id = $(this).attr("data-id")
+                // 调用接口
+                $.ajax({
+                    url: BigNew.category_delete,
+                    type: "post",
+                    data: {
+                        id: id
+                    },
+                    success: function (backData) {
+                        console.log(backData);
+                        // 如果删除成功
+                        // 重新获取数据
+                        if(backData.code===204){
+                            getCategoryData();
+                        }
+                    }
+                })
+            })
 
         })
     </script>
