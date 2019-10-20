@@ -40,7 +40,7 @@
   <script>
     $(function () {
       // 登录功能
-      $(".input_sub").click(function (e) { 
+      $(".input_sub").click(function (e) {
         // 阻止提交按钮的默认行为
         e.preventDefault()
         // 用户名
@@ -48,37 +48,35 @@
         // 密码
         var password = $('.input_pass').val().trim();
         // 非空判断
-        if(username===''||password===''){
+        if (username === '' || password === '') {
           alert('哥们,写点啥呗!!! 滑稽');
           return;
         }
         // 不为空
         $.ajax({
-          url:"http://localhost:8080/api/v1/admin/user/login",
-          type:"post",
-          data:{
-            username:username,
-            password:password
+          url: "http://localhost:8080/api/v1/admin/user/login",
+          type: "post",
+          data: {
+            username: username,
+            password: password
           },
-          success:function(backData){
+          success: function (backData) {
             console.log(backData);
-            if(backData.code===400){
+            if (backData.code === 400) {
               // 错误
               alert(backData.msg);
-            }else if(backData.code===200){
+            } else if (backData.code === 200) {
               // alert(backData.msg);
               // 保存token 方便后续的使用
-              window.localStorage.setItem('token',backData.token);
+              window.localStorage.setItem('token', backData.token);
               // 去index
-              window.location.href='./index.html';
+              window.location.href = './index.html';
             }
           }
         })
-       })
-
-
       })
-    
+    })
+
   </script>
 </body>
 
