@@ -54,7 +54,7 @@
                         <th class="text-center" width="100">操作</th>
                     </tr>
                 </thead>
-                <tbody class='artilce-tbody'>
+                <tbody class='article-tbody'>
                     <tr>
                         <td>王积千造统最头</td>
                         <td>杰克</td>
@@ -123,10 +123,38 @@
                     // 调用方法
                     var res = template('articleTem',backData);
                     // tbody中
-                    $('.artilce-tbody').html(res);
-
+                    $('.article-tbody').html(res);
                 }
             })
+       
+            // 三.筛选
+            $("#btnSearch").click(function (e) {
+                // 阻止默认行为
+                e.preventDefault();
+                // 获取类型id
+                var type = $("#selCategory").val();
+                // 获取状态
+                var state = $("#selStatus").val();
+                // console.log(type,state);
+
+                // ajax传递筛选条件获取数据
+                $.ajax({
+                    url:BigNew.article_query,
+                    data:{
+                        type:type,
+                        state:state
+                    },
+                    success:function(backData){
+                        // console.log(backData);
+                        // 调用模板引擎的方法
+                        var res = template('articleTem',backData);
+                        // 渲染到tbody中
+                        $('.article-tbody').html(res);
+                        // console.log(res);
+                    }
+                })
+
+              })
         })
     </script>
 </body>
